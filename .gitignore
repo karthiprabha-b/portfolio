@@ -1,0 +1,61 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# temporary inspect scripts, scratch files, and test previews
+public/assets/inspect_*
+public/assets/test_*
+scratch_*
+test_*
+avatar_*
+master_sec*
+sec*master*
+sec*inspect*
+sec*transition*
+slice_*
+ref_*
+hd_inspect_*
+jh_*
+journey_*
+inpaint_*
+blended_test*
+composite_*
+frame_resized_*
+new_showcase_thumb*
+title_crop*
+tr_inspect*
+video_center_crop*
+

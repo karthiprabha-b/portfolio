@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #090d1a;
+  --navy-deep: #050814;
+  --electric-blue: #0062ff;
+  --electric-cyan: #00d4ff;
+  --accent-orange: #ff5e14;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 0px !important;
+  display: none;
+}
+html::-webkit-scrollbar {
+  width: 8px;
+  display: block;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0062ff;
+}
+
+/* Complete Scrollbar Elimination Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Gradient Text Utilities */
+.text-gradient-hero-digital {
+  background: linear-gradient(135deg, #0052cc 0%, #0084ff 50%, #4361ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-hero-exp {
+  background: linear-gradient(135deg, #4361ee 0%, #7209b7 60%, #b5179e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-hero-eng {
+  background: linear-gradient(135deg, #ff5e14 0%, #ff8c00 60%, #ffa500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #0062ff 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass Panels */
+.glass-panel-dark {
+  background: rgba(13, 20, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Glow effects */
+.glow-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.glow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -10px rgba(0, 98, 255, 0.25);
+  border-color: rgba(0, 98, 255, 0.4);
+}
+
+/* Pulse badge */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+.pulse-glow {
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+/* Infinite Marquee Streams for Tech Stack (Right to Left & Left to Right) */
+@keyframes marquee-scroll-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-right 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* Doodle and cartoon animations for creative contact form */
+@keyframes doodle-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes doodle-float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-3deg);
+  }
+}
+
+@keyframes doodle-wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes doodle-pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes doodle-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-doodle-float {
+  animation: doodle-float 4.5s ease-in-out infinite;
+}
+
+.animate-doodle-float-delayed {
+  animation: doodle-float-reverse 5.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-doodle-wiggle {
+  animation: doodle-wiggle 3s ease-in-out infinite;
+}
+
+.animate-doodle-pulse {
+  animation: doodle-pulse-scale 2.5s ease-in-out infinite;
+}
+
+.animate-doodle-dash {
+  stroke-dasharray: 6 6;
+  animation: doodle-dash 2s linear infinite;
+}
+
+/* Kinetic Typography & Badge Animations */
+@keyframes rotate-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes text-jump-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes text-glow-pulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 98, 255, 0.2); }
+  50% { text-shadow: 0 0 25px rgba(0, 98, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.4); }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 18s linear infinite;
+}
+
+.animate-text-jump {
+  animation: text-jump-subtle 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: text-glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes purple-icon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(147, 51, 234, 0.45), 0 0 24px rgba(168, 85, 247, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(147, 51, 234, 0.85), 0 0 38px rgba(192, 132, 252, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+.animate-purple-pulse {
+  animation: purple-icon-pulse 3.6s ease-in-out infinite;
+}
+
+.hover-jump {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-jump:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
