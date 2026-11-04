@@ -169,7 +169,6 @@ export const Services = () => {
           }}
         >
           <source src="/assets/what_can_we_do.mp4" type="video/mp4" />
-          <source src="/assets/what%20can%20we%20do.mp4" type="video/mp4" />
         </video>
       </div>
 

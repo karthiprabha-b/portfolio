@@ -250,9 +250,7 @@ export const CreativeStudio = () => {
                   }
                 }}
               >
-                <source src="/assets/ai_video_and_creative.mp4?v=3" type="video/mp4" />
-                <source src="/assets/ai_video_creative_media.mp4" type="video/mp4" />
-                <source src="/assets/ai%20video%20creative%20media%20%20(1).mp4" type="video/mp4" />
+                <source src="/assets/ai_video_and_creative.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
