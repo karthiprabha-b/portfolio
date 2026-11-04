@@ -17,7 +17,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   children,
   animation = 'fade-up',
   delay = 0,
-  duration = 1100, // Luxurious, deliberate, cinematic pacing
+  duration = 950, // Silky, responsive, perceptible pacing
   className = '',
   as: Component = 'div',
 }) => {
@@ -34,36 +34,54 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
     const currentEl = elementRef.current;
     if (!currentEl) return;
 
-    // Check immediate viewport intersection on mount
+    // Check if element is ALREADY inside viewport on mount (e.g. Hero, or loaded with hash / page refresh)
     const rect = currentEl.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 80 && rect.bottom > -80) {
-      setIsVisible(true);
-      return;
+    const inInitialViewport = rect.top < window.innerHeight - 30 && rect.bottom > 30;
+
+    if (inInitialViewport) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, delay);
+      return () => clearTimeout(timer);
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(currentEl);
-        }
-      },
-      {
-        threshold: 0.01,
-        rootMargin: '100px 0px 100px 0px',
+    // Scroll check handler (fallback that activates only when element actually enters the screen)
+    const handleScrollCheck = () => {
+      if (!currentEl) return;
+      const r = currentEl.getBoundingClientRect();
+      if (r.top < window.innerHeight - 30 && r.bottom > 20) {
+        setIsVisible(true);
+        window.removeEventListener('scroll', handleScrollCheck);
       }
-    );
+    };
 
-    observer.observe(currentEl);
+    // Viewport IntersectionObserver: triggers animation dynamically AS USER SCROLLS to each section
+    let observer: IntersectionObserver | null = null;
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setIsVisible(true);
+              if (currentEl) observer?.unobserve(currentEl);
+              window.removeEventListener('scroll', handleScrollCheck);
+            }
+          });
+        },
+        {
+          threshold: 0.05,
+          rootMargin: '0px 0px -30px 0px', // Triggers when 30px inside viewport so user sees the motion clearly
+        }
+      );
 
-    // Fail-safe watchdog: Guarantees text NEVER stays invisible if browser throttles observer
-    const failSafeTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, 700 + delay);
+      observer.observe(currentEl);
+    }
+
+    window.addEventListener('scroll', handleScrollCheck, { passive: true });
 
     return () => {
-      if (currentEl) observer.unobserve(currentEl);
-      clearTimeout(failSafeTimer);
+      if (currentEl && observer) observer.unobserve(currentEl);
+      window.removeEventListener('scroll', handleScrollCheck);
     };
   }, [delay]);
 
